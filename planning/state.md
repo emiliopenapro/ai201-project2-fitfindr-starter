@@ -1,7 +1,7 @@
 # State — Current Project Status
 
 ## Active Sprint
-**Sprint 2 — COMPLETE (pending commit).** Next: Sprint 3 (agent.py + app.py + error handling).
+**Sprint 3 — code COMPLETE (pending commit).** Remaining human tasks: launch UI for screenshots + record demo video.
 
 ## Status
 - [x] Scaffold created
@@ -13,20 +13,21 @@
 - [x] planning.md fully written (all sections, no placeholders)
 - [x] tools.py implemented (Sprint 2)
 - [x] tests/test_tools.py passing (Sprint 2) — 9/9 passing
-- [ ] agent.py planning loop implemented (Sprint 3)
-- [ ] app.py handle_query() implemented (Sprint 3)
-- [ ] All 3 failure modes triggered and documented (Sprint 3)
-- [ ] README.md complete (Sprint 3)
-- [ ] Demo video recorded (Sprint 3)
+- [x] agent.py planning loop implemented (Sprint 3)
+- [x] app.py handle_query() implemented (Sprint 3)
+- [x] All 3 failure modes triggered and documented (Sprint 3) — sprints/sprint-3/failure-modes.md
+- [x] README.md complete (Sprint 3)
+- [ ] Demo video recorded (Sprint 3) — HUMAN TASK
 
 ## Recently Completed
 - Scaffold initialized for FitFindr
 - Sprint 1: read all data/stubs, wrote full planning.md (incl. compare_prices stretch spec)
 - Logged DEC-007 (size = normalized substring) and DEC-008 (compare_prices scope)
 - Sprint 2: implemented all 3 tools in tools.py; added conftest.py + tests/test_tools.py (9 tests, all passing)
+- Sprint 3: implemented run_agent() (conditional loop + parse_query) and handle_query(); split Sprint 3 pack into blueprint/acceptance/handoff files; documented 3 failure modes; wrote README.md. Resolved run_agent signature to (query, wardrobe) per starter app.py.
 
 ## Currently Blocked
-- Nothing blocked. Next: commit Sprint 2, then start Sprint 3 (agent.py + app.py).
+- Nothing blocked. Remaining: human launches `python app.py` for screenshots and records the 3–5 min demo video.
 
 ## Deadline Tracker
 | Milestone | Task                          | Est. Time | Status        |
