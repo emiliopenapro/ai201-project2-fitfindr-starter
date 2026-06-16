@@ -21,6 +21,24 @@ from utils.data_loader import load_listings
 
 load_dotenv()
 
+MODEL = "llama-3.3-70b-versatile"
+
+SUGGEST_OUTFIT_SYSTEM_PROMPT = (
+    "You are a personal stylist helping someone style a thrifted find. "
+    "Given the new item and the user's existing wardrobe, suggest one complete "
+    "outfit combination. Be specific about which wardrobe pieces to pair with the "
+    "new item. Keep the suggestion to 2-3 sentences. Sound like a real stylist, "
+    "not a product description."
+)
+
+CREATE_FIT_CARD_SYSTEM_PROMPT = (
+    "You are writing a short Instagram caption for a thrift find outfit post. "
+    "Write 1-2 sentences in a casual, authentic voice — like a real person sharing "
+    "their outfit, not a brand. Include the item name, price, and platform it was "
+    "found on. Use 1-2 relevant emojis naturally. Make it sound different every "
+    "time — vary the structure and phrasing."
+)
+
 
 # ── Groq client ───────────────────────────────────────────────────────────────
 
@@ -69,8 +87,32 @@ def search_listings(
 
     Before writing code, fill in the Tool 1 section of planning.md.
     """
-    # Replace this with your implementation
-    return []
+    try:
+        listings = load_listings()
+        keywords = [kw for kw in description.lower().split() if kw]
+
+        scored: list[tuple[int, dict]] = []
+        for item in listings:
+            if max_price is not None and item.get("price", float("inf")) > max_price:
+                continue
+            # Normalized substring size match (DEC-007): "M" matches "S/M", "M/L", etc.
+            if size and size.lower() not in str(item.get("size", "")).lower():
+                continue
+
+            searchable = (
+                f"{item.get('title', '')} "
+                f"{item.get('description', '')} "
+                f"{' '.join(item.get('style_tags', []))}"
+            ).lower()
+            score = sum(1 for kw in keywords if kw in searchable)
+            if score == 0:
+                continue
+            scored.append((score, item))
+
+        scored.sort(key=lambda pair: pair[0], reverse=True)
+        return [item for _, item in scored]
+    except Exception:
+        return []
 
 
 # ── Tool 2: suggest_outfit ────────────────────────────────────────────────────
@@ -100,8 +142,36 @@ def suggest_outfit(new_item: dict, wardrobe: dict) -> str:
 
     Before writing code, fill in the Tool 2 section of planning.md.
     """
-    # Replace this with your implementation
-    return ""
+    try:
+        wardrobe_items = (wardrobe or {}).get("items", [])
+
+        if wardrobe_items:
+            wardrobe_desc = ", ".join(i["name"] for i in wardrobe_items)
+            user_content = (
+                f"New thrifted item: {new_item['title']} — {new_item['description']}\n"
+                f"User's wardrobe: {wardrobe_desc}\n"
+                "Suggest one complete outfit pairing the new item with specific "
+                "pieces from this wardrobe."
+            )
+        else:
+            user_content = (
+                f"New thrifted item: {new_item['title']} — {new_item['description']}\n"
+                "The user has no wardrobe entered yet. Suggest one complete outfit "
+                "using the new item plus common wardrobe basics."
+            )
+
+        client = _get_groq_client()
+        response = client.chat.completions.create(
+            model=MODEL,
+            messages=[
+                {"role": "system", "content": SUGGEST_OUTFIT_SYSTEM_PROMPT},
+                {"role": "user", "content": user_content},
+            ],
+            temperature=0.7,
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        return f"Could not generate outfit suggestion: {e}"
 
 
 # ── Tool 3: create_fit_card ───────────────────────────────────────────────────
@@ -133,5 +203,23 @@ def create_fit_card(outfit: str, new_item: dict) -> str:
 
     Before writing code, fill in the Tool 3 section of planning.md.
     """
-    # Replace this with your implementation
-    return ""
+    if not outfit or not outfit.strip():
+        return "Cannot create a fit card without an outfit suggestion."
+    try:
+        user_content = (
+            f"Item: {new_item['title']} — ${new_item['price']} "
+            f"from {new_item['platform']}\n"
+            f"Outfit: {outfit}"
+        )
+        client = _get_groq_client()
+        response = client.chat.completions.create(
+            model=MODEL,
+            messages=[
+                {"role": "system", "content": CREATE_FIT_CARD_SYSTEM_PROMPT},
+                {"role": "user", "content": user_content},
+            ],
+            temperature=0.9,
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        return f"Could not generate fit card: {e}"

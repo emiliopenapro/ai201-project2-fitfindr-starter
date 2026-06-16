@@ -1,7 +1,7 @@
 # State — Current Project Status
 
 ## Active Sprint
-**Sprint 1 — COMPLETE (pending commit).** Next: Sprint 2 (implement tools.py + tests).
+**Sprint 2 — COMPLETE (pending commit).** Next: Sprint 3 (agent.py + app.py + error handling).
 
 ## Status
 - [x] Scaffold created
@@ -11,8 +11,8 @@
 - [x] data/wardrobe_schema.json read
 - [x] utils/data_loader.py read
 - [x] planning.md fully written (all sections, no placeholders)
-- [ ] tools.py implemented (Sprint 2)
-- [ ] tests/test_tools.py passing (Sprint 2)
+- [x] tools.py implemented (Sprint 2)
+- [x] tests/test_tools.py passing (Sprint 2) — 9/9 passing
 - [ ] agent.py planning loop implemented (Sprint 3)
 - [ ] app.py handle_query() implemented (Sprint 3)
 - [ ] All 3 failure modes triggered and documented (Sprint 3)
@@ -23,9 +23,10 @@
 - Scaffold initialized for FitFindr
 - Sprint 1: read all data/stubs, wrote full planning.md (incl. compare_prices stretch spec)
 - Logged DEC-007 (size = normalized substring) and DEC-008 (compare_prices scope)
+- Sprint 2: implemented all 3 tools in tools.py; added conftest.py + tests/test_tools.py (9 tests, all passing)
 
 ## Currently Blocked
-- Nothing blocked. Next: commit "Complete planning.md — Sprint 1", then start Sprint 2.
+- Nothing blocked. Next: commit Sprint 2, then start Sprint 3 (agent.py + app.py).
 
 ## Deadline Tracker
 | Milestone | Task                          | Est. Time | Status        |
