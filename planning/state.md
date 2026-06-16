@@ -1,7 +1,7 @@
 # State — Current Project Status
 
 ## Active Sprint
-**Sprint 3 — code COMPLETE (pending commit).** Remaining human tasks: launch UI for screenshots + record demo video.
+**Sprint 3 — COMPLETE.** UI screenshots captured and demo video recorded (human tasks done). Remaining: push commits to origin.
 
 ## Status
 - [x] Scaffold created
@@ -17,7 +17,8 @@
 - [x] app.py handle_query() implemented (Sprint 3)
 - [x] All 3 failure modes triggered and documented (Sprint 3) — sprints/sprint-3/failure-modes.md
 - [x] README.md complete (Sprint 3)
-- [ ] Demo video recorded (Sprint 3) — HUMAN TASK
+- [x] Demo video recorded (Sprint 3)
+- [x] Failure-mode UI screenshots captured (Sprint 3)
 
 ## Recently Completed
 - Scaffold initialized for FitFindr
