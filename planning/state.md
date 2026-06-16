@@ -1,7 +1,7 @@
 # State — Current Project Status
 
 ## Active Sprint
-**Sprint 3 — COMPLETE.** UI screenshots captured and demo video recorded (human tasks done). Remaining: push commits to origin.
+**Sprint 3 — COMPLETE.** Demo video recorded (satisfies Milestone 5's "screenshot OR record"). Standalone screenshots optional — not separately required by the guide. All commits pushed to origin.
 
 ## Status
 - [x] Scaffold created
@@ -17,8 +17,8 @@
 - [x] app.py handle_query() implemented (Sprint 3)
 - [x] All 3 failure modes triggered and documented (Sprint 3) — sprints/sprint-3/failure-modes.md
 - [x] README.md complete (Sprint 3)
-- [x] Demo video recorded (Sprint 3)
-- [x] Failure-mode UI screenshots captured (Sprint 3)
+- [x] Demo video recorded (Sprint 3) — covers a triggered failure (satisfies Milestone 5)
+- [~] Failure-mode UI screenshots — OPTIONAL (guide says "screenshot OR record"; video covers it)
 
 ## Recently Completed
 - Scaffold initialized for FitFindr
@@ -28,7 +28,7 @@
 - Sprint 3: implemented run_agent() (conditional loop + parse_query) and handle_query(); split Sprint 3 pack into blueprint/acceptance/handoff files; documented 3 failure modes; wrote README.md. Resolved run_agent signature to (query, wardrobe) per starter app.py.
 
 ## Currently Blocked
-- Nothing blocked. Remaining: human launches `python app.py` for screenshots and records the 3–5 min demo video.
+- Nothing blocked. All deliverables complete and pushed to origin. Ready to submit (repo link, planning.md, README.md, demo video).
 
 ## Deadline Tracker
 | Milestone | Task                          | Est. Time | Status        |
